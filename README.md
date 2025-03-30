@@ -24,13 +24,20 @@ gcloud auth application-default login
 
 terraform plan
 
-# Create resources in gcp project
-#   You may get an error that Notebooks API is disabled on your new project, if so, follow the link to enable the API
-#   NOTE: These resources could be expensive, make sure you remove them with terraform destroy below
+# Create resources in GCP project
+#   You may encounter an error indicating that the Notebooks API is 
+#   disabled on your new project. If this happens, follow the provided 
+#   link to enable the API.
+
+#   **Note:** These resources could be expensive. Ensure you remove 
+#   them using `terraform destroy` after you are done.
 
 terraform apply
 
+# Log in to the console and play with the workbench instance
 
+# Remember to destroy to manage costs
+terraform destroy
 
 ```
 
