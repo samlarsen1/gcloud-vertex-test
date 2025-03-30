@@ -12,6 +12,7 @@ Before setting up this project, ensure you have completed the setup steps in the
   * Run `setup-gcloud-project.sh` so you have a project to use for testing
   * Associate a billing account to that project
 * Run `setup-vars.sh` to add default environment variables for terraform.
+* Run `setup-terraform-tools.sh` for additional tf quality tools
 
 
 ## Usage

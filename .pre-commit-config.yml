@@ -1,0 +1,154 @@
+ci:
+  autoupdate_schedule: quarterly
+  skip:
+  - shfmt
+  - shellcheck
+  - hadolint
+
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v5.0.0
+  hooks:
+  # Git style
+  - id: check-added-large-files
+  - id: check-merge-conflict
+  - id: check-vcs-permalinks
+  - id: forbid-new-submodules
+  - id: no-commit-to-branch
+
+  # Common errors
+  - id: end-of-file-fixer
+  - id: trailing-whitespace
+    args: [--markdown-linebreak-ext=md]
+    exclude: CHANGELOG.md
+  - id: check-yaml
+  - id: check-merge-conflict
+  - id: check-executables-have-shebangs
+
+  # Cross platform
+  - id: check-case-conflict
+  - id: mixed-line-ending
+    args: [--fix=lf]
+
+  # Non-modifying checks:
+  - id: name-tests-test
+    files: >-
+      ^tests/[^_].*\.py$
+
+  # Security
+  - id: detect-aws-credentials
+    args:
+    - --allow-missing-credentials
+  - id: detect-private-key
+
+  # Detect hardcoded secrets
+- repo: https://github.com/gitleaks/gitleaks
+  rev: v8.24.0
+  hooks:
+  - id: gitleaks
+
+# Dockerfile
+- repo: https://github.com/hadolint/hadolint
+  rev: v2.12.1-beta
+  hooks:
+  - id: hadolint
+
+# YAML
+- repo: https://github.com/jumanjihouse/pre-commit-hook-yamlfmt
+  rev: 0.2.3
+  hooks:
+  - id: yamlfmt
+    args:
+    - --mapping=2
+    - --sequence=2
+    - --offset=0
+    - --width=75
+    - --implicit_start
+
+- repo: https://github.com/adrienverge/yamllint.git
+  rev: v1.36.2
+  hooks:
+  - id: yamllint
+    types:
+    - file
+    - yaml
+    args:
+    - --strict
+
+# JSON5
+- repo: https://github.com/pre-commit/mirrors-prettier
+  rev: v3.1.0
+  hooks:
+  - id: prettier
+    # https://prettier.io/docs/en/options.html#parser
+    files: .json5$
+
+# Bash
+- repo: https://github.com/jumanjihouse/pre-commit-hooks
+  rev: 3.0.0
+  hooks:
+  - id: shfmt
+    args:
+    - -l
+    - -i
+    - '2'
+    - -ci
+    - -sr
+    - -w
+  - id: shellcheck
+
+# Python
+- repo: https://github.com/pre-commit/mirrors-mypy.git
+  rev: v1.15.0
+  hooks:
+  - id: mypy
+    alias: mypy-py313
+    name: MyPy, for Python 3.13
+    additional_dependencies:
+    - lxml  # dep of `--txt-report`, `--cobertura-xml-report` & `--html-report`
+    - pytest
+    - pytest-mock
+    args:
+    - --python-version=3.13
+    - --any-exprs-report=.tox/.tmp/.test-results/mypy--py-3.13
+    - --cobertura-xml-report=.tox/.tmp/.test-results/mypy--py-3.13
+    - --html-report=.tox/.tmp/.test-results/mypy--py-3.13
+    - --linecount-report=.tox/.tmp/.test-results/mypy--py-3.13
+    - --linecoverage-report=.tox/.tmp/.test-results/mypy--py-3.13
+    - --lineprecision-report=.tox/.tmp/.test-results/mypy--py-3.13
+    - --txt-report=.tox/.tmp/.test-results/mypy--py-3.13
+    pass_filenames: false
+  - id: mypy
+    alias: mypy-py311
+    name: MyPy, for Python 3.11
+    additional_dependencies:
+    - lxml  # dep of `--txt-report`, `--cobertura-xml-report` & `--html-report`
+    - pytest
+    - pytest-mock
+    args:
+    - --python-version=3.11
+    - --any-exprs-report=.tox/.tmp/.test-results/mypy--py-3.11
+    - --cobertura-xml-report=.tox/.tmp/.test-results/mypy--py-3.11
+    - --html-report=.tox/.tmp/.test-results/mypy--py-3.11
+    - --linecount-report=.tox/.tmp/.test-results/mypy--py-3.11
+    - --linecoverage-report=.tox/.tmp/.test-results/mypy--py-3.11
+    - --lineprecision-report=.tox/.tmp/.test-results/mypy--py-3.11
+    - --txt-report=.tox/.tmp/.test-results/mypy--py-3.11
+    pass_filenames: false
+  - id: mypy
+    alias: mypy-py39
+    name: MyPy, for Python 3.9
+    additional_dependencies:
+    - lxml  # dep of `--txt-report`, `--cobertura-xml-report` & `--html-report`
+    - pytest
+    - pytest-mock
+    args:
+    - --python-version=3.9
+    - --any-exprs-report=.tox/.tmp/.test-results/mypy--py-3.9
+    - --cobertura-xml-report=.tox/.tmp/.test-results/mypy--py-3.9
+    - --html-report=.tox/.tmp/.test-results/mypy--py-3.9
+    - --linecount-report=.tox/.tmp/.test-results/mypy--py-3.9
+    - --linecoverage-report=.tox/.tmp/.test-results/mypy--py-3.9
+    - --lineprecision-report=.tox/.tmp/.test-results/mypy--py-3.9
+    - --txt-report=.tox/.tmp/.test-results/mypy--py-3.9
+    pass_filenames: false
