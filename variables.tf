@@ -9,10 +9,20 @@ variable "region" {
   default     = "europe-west1"
 }
 
+variable "name_prefix" {
+  description = "Prefix for naming resources"
+  type        = string
+  default     = "gcp-test"
+}
 variable "notebook_name" {
   description = "The name of the Vertex AI Workbench notebook"
   type        = string
-  default     = "vertex-notebook"
+  default     = "notebook"
+}
+variable "kafka_cluster_name" {
+  description = "The name of the Confluent Kafka cluster"
+  type        = string
+  default     = "kafka-cluster"
 }
 
 variable "machine_type" {

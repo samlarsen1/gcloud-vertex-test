@@ -12,7 +12,15 @@ Before setting up this project, ensure you have completed the setup steps in the
   * Run `setup-gcloud-project.sh` so you have a project to use for testing
   * Associate a billing account to that project
 * Run `setup-vars.sh` to add default environment variables for terraform.
-* Run `setup-terraform-tools.sh` for additional tf quality tools
+* Install `pre-commit` dependencies
+  * Run`setup-terraform-tools.sh` for additional tf quality tools
+  * Install python `pre-commit` tools with venv
+    ```bash
+    python3 -m venv ~/.venvs/terraform-tools
+    source ~/.venvs/terraform-tools/bin/activate
+    pip3 install --no-cache-dir pre-commit checkov
+    pre-commit install
+    ```
 
 
 ## Usage
@@ -26,11 +34,11 @@ gcloud auth application-default login
 terraform plan
 
 # Create resources in GCP project
-#   You may encounter an error indicating that the Notebooks API is 
-#   disabled on your new project. If this happens, follow the provided 
+#   You may encounter an error indicating that the Notebooks API is
+#   disabled on your new project. If this happens, follow the provided
 #   link to enable the API.
 
-#   **Note:** These resources could be expensive. Ensure you remove 
+#   **Note:** These resources could be expensive. Ensure you remove
 #   them using `terraform destroy` after you are done.
 
 terraform apply

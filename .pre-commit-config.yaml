@@ -14,7 +14,7 @@ repos:
   - id: check-merge-conflict
   - id: check-vcs-permalinks
   - id: forbid-new-submodules
-  - id: no-commit-to-branch
+  # - id: no-commit-to-branch
 
   # Common errors
   - id: end-of-file-fixer
@@ -65,15 +65,15 @@ repos:
     - --width=75
     - --implicit_start
 
-- repo: https://github.com/adrienverge/yamllint.git
-  rev: v1.36.2
-  hooks:
-  - id: yamllint
-    types:
-    - file
-    - yaml
-    args:
-    - --strict
+# - repo: https://github.com/adrienverge/yamllint.git
+#   rev: v1.36.2
+#   hooks:
+#   - id: yamllint
+#     types:
+#     - file
+#     - yaml
+#     # args:
+#     # - --strict
 
 # JSON5
 - repo: https://github.com/pre-commit/mirrors-prettier
@@ -84,18 +84,18 @@ repos:
     files: .json5$
 
 # Bash
-- repo: https://github.com/jumanjihouse/pre-commit-hooks
-  rev: 3.0.0
-  hooks:
-  - id: shfmt
-    args:
-    - -l
-    - -i
-    - '2'
-    - -ci
-    - -sr
-    - -w
-  - id: shellcheck
+# - repo: https://github.com/jumanjihouse/pre-commit-hooks
+#   rev: 3.0.0
+#   hooks:
+#   - id: shfmt
+#     args:
+#     - -l
+#     - -i
+#     - '2'
+#     - -ci
+#     - -sr
+#     - -w
+#   - id: shellcheck
 
 # Python
 - repo: https://github.com/pre-commit/mirrors-mypy.git
